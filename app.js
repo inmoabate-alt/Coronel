@@ -9,3 +9,14 @@ function open(i){show(i);modal.showModal();document.body.classList.add('viewer-o
 photos.slice(1).forEach(([n,label],i)=>{const link=document.createElement('a');link.href=url(n);link.setAttribute('aria-label',`Ampliar: ${label}`);const img=document.createElement('img');img.src=url(n);img.alt=label;img.loading='lazy';link.append(img);link.onclick=e=>{e.preventDefault();open(i+1)};document.querySelector(i<5?'#gallery':'#extra-gallery').append(link)});
 const cover=document.querySelector('.hero-photo');cover.onclick=()=>open(0);cover.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(0)}};
 document.querySelector('.viewer-close').onclick=()=>modal.close();modal.onclose=()=>document.body.classList.remove('viewer-open');document.querySelector('.viewer-prev').onclick=()=>show(selected-1);document.querySelector('.viewer-next').onclick=()=>show(selected+1);document.addEventListener('keydown',e=>{if(modal.open){if(e.key==='ArrowLeft')show(selected-1);if(e.key==='ArrowRight')show(selected+1)}});
+
+// Contact mide el clic hacia WhatsApp; no confirma un mensaje enviado.
+document.querySelector('.whatsapp').addEventListener('click', () => {
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'Contact', {
+      content_name: 'Coronel Alegre',
+      content_ids: ['AHO12365728'],
+      content_type: 'product'
+    });
+  }
+});
